@@ -39,6 +39,7 @@ class App extends Component {
     const filteredPokemons = pokemons.filter(poke => {
       return poke.name.toLowerCase().includes(searchField.toLowerCase());
     });
+    console.log(filteredPokemons);
     return (
       <div className="tc">
         <h1 className="f1">RoboFriends</h1>

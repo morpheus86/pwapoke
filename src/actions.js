@@ -10,7 +10,14 @@ import {
   GETTING_POKEMON_FAILED
 } from "./constants";
 
-const P = new Pokedex();
+var options = {
+  protocol: "https",
+  // hostName: "localhost:3000",
+  versionPath: "/api/v2/pokemon/?limit=20",
+  cacheLimit: 100 * 1000, // 100s
+  timeout: 5 * 1000 // 5s
+};
+var P = new Pokedex(options);
 
 export const setSearchField = text => ({
   type: CHANGE_SEARCHFIELD,
