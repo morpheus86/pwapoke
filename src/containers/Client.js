@@ -10,7 +10,7 @@ export default class Client extends Component {
         <div>
           <Switch>
             <Route exact path="/" component={App} />
-            <Route path="/pokemon/:name" component={SinglePokemon} />
+            <Route path="/pokemon/:name/:id" component={SinglePokemon} />
           </Switch>
         </div>
       </BrowserRouter>

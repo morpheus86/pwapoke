@@ -4,7 +4,8 @@ import {
   REQUEST_POKEMONS_SUCCESS,
   REQUEST_POKEMONS_FAILED,
   GET_POKEMON_BY_NAME,
-  GETTING_POKEMON_FAILED
+  GETTING_POKEMON_FAILED,
+  GET_CHARACTERISTICS
 } from "./constants";
 
 const initialStateSearch = {
@@ -42,7 +43,8 @@ export const requestPokemons = (state = initialStatePokemons, action = {}) => {
 };
 
 const initStatePokemon = {
-  pokemon: []
+  pokemon: [],
+  characteristics: []
 };
 export const requestPokemon = (state = initStatePokemon, action = {}) => {
   switch (action.type) {
@@ -56,6 +58,11 @@ export const requestPokemon = (state = initStatePokemon, action = {}) => {
       return {
         ...state,
         error: action.error
+      };
+    case GET_CHARACTERISTICS:
+      return {
+        ...state,
+        characteristics: action.char
       };
     default:
       return state;

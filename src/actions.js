@@ -7,13 +7,14 @@ import {
   REQUEST_POKEMONS_SUCCESS,
   REQUEST_POKEMONS_FAILED,
   GET_POKEMON_BY_NAME,
-  GETTING_POKEMON_FAILED
+  GETTING_POKEMON_FAILED,
+  GET_CHARACTERISTICS
 } from "./constants";
 
 var options = {
   protocol: "https",
   // hostName: "localhost:3000",
-  versionPath: "/api/v2/pokemon/?limit=20",
+  versionPath: "/api/v2/",
   cacheLimit: 100 * 1000, // 100s
   timeout: 5 * 1000 // 5s
 };
@@ -41,5 +42,17 @@ export const fetchByName = name => async dispatch => {
     dispatch({ type: GET_POKEMON_BY_NAME, pokemon });
   } catch (error) {
     dispatch({ type: GETTING_POKEMON_FAILED, error });
+  }
+};
+
+export const getCharacteristics = id => async dispatch => {
+  try {
+    const url = `https://pokeapi.co/api/v2/evolution-chain/${id}`;
+    const poke = await axios.get(url);
+    const data = poke.data;
+    console.log(data);
+    dispatch({ type: GET_CHARACTERISTICS, char: data });
+  } catch (error) {
+    console.error(error);
   }
 };

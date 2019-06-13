@@ -1,0 +1,40 @@
+import React, { Component } from "react";
+
+class Characteristics extends Component {
+  render() {
+    const { chain, id, img } = this.props;
+    const pic = img && img;
+    const evolve = chain && chain.evolves_to[0].species.name;
+    const idx =
+      chain &&
+      chain.evolves_to[0].species.url.split("/")[
+        chain.evolves_to[0].species.url.split("/").length - 2
+      ];
+    const src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${idx}.png?size=200x200`;
+
+    return (
+      <div className="evolutions">
+        <div className="evolution-row">
+          <div className="evolution-row-inner">
+            <div className="evolution-sprite monster-sprite">
+              <img src={pic} alt="" />
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" className="svg">
+              <path d="M24 16V8l16 16-16 16v-8H8V16z" />
+            </svg>
+            <div className="evolution-sprite monster-sprite">
+              <img src={src} alt="" />
+            </div>
+          </div>
+          <div className="evolution-label">
+            <span>
+              <strong />.
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Characteristics;

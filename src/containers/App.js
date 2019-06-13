@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { setSearchField, requestPokemons } from "../actions";
 
@@ -19,8 +19,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-// dispatch the DOM changes to call an action. note mapStateToProps returns object, mapDispatchToProps returns function
-// the function returns an object then uses connect to change the data from redecers.
 const mapDispatchToProps = dispatch => {
   return {
     onSearchChange: event => dispatch(setSearchField(event.target.value)),
@@ -34,7 +32,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.props);
     const { pokemons, searchField, onSearchChange, isPending } = this.props;
     const filteredPokemons = pokemons.filter(poke => {
       return poke.name.toLowerCase().includes(searchField.toLowerCase());
@@ -59,7 +56,6 @@ class App extends Component {
   }
 }
 
-// action done from mapDispatchToProps will channge state from mapStateToProps
 export default connect(
   mapStateToProps,
   mapDispatchToProps
