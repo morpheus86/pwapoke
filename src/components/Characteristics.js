@@ -2,14 +2,14 @@ import React, { Component } from "react";
 
 class Characteristics extends Component {
   render() {
-    const { chain, id, img, evolve_from } = this.props;
+    const { chain, img, evolve_from, name } = this.props;
     const pic = img && img;
-    const evolve = chain && chain.evolves_to[0].species.name;
     const idx =
-      chain &&
-      chain.evolves_to[0].species.url.split("/")[
-        chain.evolves_to[0].species.url.split("/").length - 2
-      ];
+      chain && chain.evolves_to.length > 1
+        ? chain.evolves_to[0].species.url.split("/")[
+            chain.evolves_to[0].species.url.split("/").length - 2
+          ]
+        : null;
     const evolving_idx =
       evolve_from && evolve_from.split("/")[evolve_from.split("/").length - 2];
 
@@ -45,11 +45,14 @@ class Characteristics extends Component {
               </div>
             </div>
           </div>
-          <div className="evolution-label">
-            <span>
-              <strong />.
-            </span>
-          </div>
+        </div>
+      );
+    } else if (!idx) {
+      return (
+        <div>
+          <p>
+            <strong>{name} </strong> has no evolutions
+          </p>
         </div>
       );
     } else {

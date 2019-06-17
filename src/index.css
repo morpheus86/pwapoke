@@ -9,7 +9,7 @@ body {
   ); /* w3c */
 }
 
-.monster-details {
+/* .monster-details {
   display: flex;
   margin: 0 20px 10px;
 }
@@ -111,15 +111,15 @@ body {
 .poke-list {
   display: flex;
   justify-content: space-between;
-}
-.evolution-label span {
+} */
+/* .evolution-label span {
   flex-grow: 1;
   text-align: center;
 }
 .arrow-right {
   width: 48px;
   height: 48px;
-}
+} */
 .evolution-row .evolution-sprite {
   flex-grow: 1;
 }

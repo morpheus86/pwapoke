@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  fetchByName,
-  getCharacteristics,
-  getSpecies,
-  getHabitat
-} from "../actions";
+import { fetchByName, getCharacteristics, getSpecies } from "../actions";
 import Characteristics from "./Characteristics";
-import Pokedex from "pokedex-promise-v2";
 
 class SinglePokemon extends Component {
   componentDidMount() {
@@ -33,7 +27,9 @@ class SinglePokemon extends Component {
     const pic = sprites && sprites.front_default;
 
     const abilityName =
-      abilities && abilities.map(ab => ab.ability.name).join(", ");
+      abilities && abilities
+        ? abilities.map(ab => ab.ability.name).join(", ")
+        : "NA";
     const type =
       types &&
       types
@@ -53,7 +49,7 @@ class SinglePokemon extends Component {
                 <div
                   className="progress-bar "
                   style={{
-                    width: `${st.base_stat / 1.2}%`,
+                    width: `${st.base_stat / 1.7}%`,
                     backgroundColor: `#c2185b`
                   }}
                   role="progressbar"
@@ -77,19 +73,29 @@ class SinglePokemon extends Component {
         })
         .join(", ");
 
-    const catchRate = this.props.species && this.props.species.capture_rate;
+    const catchRate =
+      this.props.species && this.props.species.capture_rate
+        ? this.props.species.capture_rate
+        : "NA";
 
-    const hash_step = this.props.species && this.props.species.hatch_counter;
+    const hash_step =
+      this.props.species && this.props.species.hatch_counter
+        ? this.props.species.hatch_counter
+        : "NA";
 
     const egg_group =
-      this.props.species.egg_groups &&
-      this.props.species.egg_groups.map(el => el.name).join(", ");
+      this.props.species.egg_groups && this.props.species.egg_groups
+        ? this.props.species.egg_groups.map(el => el.name).join(", ")
+        : "NA";
 
     const evolve_from =
       this.props.species.evolves_from_species &&
       this.props.species.evolves_from_species.url;
 
-    const shape = this.props.species.shape && this.props.species.shape.name;
+    const shape =
+      this.props.species.shape && this.props.species.shape.name
+        ? this.props.species.shape.name
+        : "NA";
     return (
       this.props.match.params.id && (
         <div className="tc">
@@ -97,8 +103,8 @@ class SinglePokemon extends Component {
             <div className="tc">
               <h5>Id: {id}</h5>
               <img
+                alt="pokemon"
                 src={pic}
-                alt="pokemon-image"
                 className="br-100 h4 w4 dib ba b--black-05 pa2"
                 title="Photo of pokemon"
               />
@@ -156,6 +162,7 @@ class SinglePokemon extends Component {
               chain={chain}
               img={pic}
               evolve_from={evolve_from}
+              name={name}
             />
           </article>
         </div>

@@ -1,13 +1,15 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { setSearchField, requestPokemons } from "../actions";
 
-import CardList from "../components/CardList";
+// import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
 import ErrorBoundry from "../components/ErrorBoundry";
 
 import "./App.css";
+
+const CardList = lazy(() => import("../components/CardList"));
 
 const mapStateToProps = state => {
   return {
@@ -39,13 +41,15 @@ class App extends Component {
         <h1 className="f1">RoboFriends</h1>
         <SearchBox searchChange={onSearchChange} />
         <Scroll>
-          {isPending ? (
-            <h1>Loading</h1>
-          ) : (
-            <ErrorBoundry>
-              <CardList pokemons={filteredPokemons} isPending={isPending} />
-            </ErrorBoundry>
-          )}
+          <Suspense fallback={<div>Loading...</div>}>
+            {isPending ? (
+              <h1>Loading</h1>
+            ) : (
+              <ErrorBoundry>
+                <CardList pokemons={filteredPokemons} isPending={isPending} />
+              </ErrorBoundry>
+            )}
+          </Suspense>
         </Scroll>
       </div>
     );

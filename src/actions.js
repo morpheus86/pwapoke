@@ -1,5 +1,4 @@
 import axios from "axios";
-import Pokedex from "pokedex-promise-v2";
 
 import {
   CHANGE_SEARCHFIELD,
@@ -13,14 +12,6 @@ import {
   GET_SPECIES_ERROR
 } from "./constants";
 
-var options = {
-  protocol: "https",
-  versionPath: "/api/v2/",
-  cacheLimit: 100 * 1000, // 100s
-  timeout: 5 * 1000 // 5s
-};
-var P = new Pokedex(options);
-
 export const setSearchField = text => ({
   type: CHANGE_SEARCHFIELD,
   payload: text
@@ -29,7 +20,9 @@ export const setSearchField = text => ({
 export const requestPokemons = () => async dispatch => {
   try {
     dispatch({ type: REQUEST_POKEMONS_PENDING });
-    const poke = await P.getPokemonsList();
+    const url = `https://pokeapi.co/api/v2/pokemon/?limit=850`;
+    const res = await axios.get(url);
+    const poke = res.data;
     dispatch({ type: REQUEST_POKEMONS_SUCCESS, payload: poke.results });
   } catch (error) {
     dispatch({ type: REQUEST_POKEMONS_FAILED, payload: error });
@@ -38,7 +31,9 @@ export const requestPokemons = () => async dispatch => {
 
 export const fetchByName = name => async dispatch => {
   try {
-    const pokemon = await P.getPokemonByName(name);
+    const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
+    const res = await axios.get(url);
+    const pokemon = res.data;
     dispatch({ type: GET_POKEMON_BY_NAME, pokemon });
   } catch (error) {
     dispatch({ type: GETTING_POKEMON_FAILED, error });
@@ -58,7 +53,9 @@ export const getCharacteristics = id => async dispatch => {
 
 export const getSpecies = name => async dispatch => {
   try {
-    const species = await P.getPokemonSpeciesByName(name);
+    const url = `https://pokeapi.co/api/v2/pokemon-species/${name}`;
+    const res = await axios.get(url);
+    const species = res.data;
     dispatch({ type: GET_SPECIES, species });
   } catch (error) {
     dispatch({ type: GET_SPECIES_ERROR, error });
