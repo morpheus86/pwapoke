@@ -8,7 +8,12 @@ import "tachyons";
 
 import Client from "./containers/Client";
 import registerServiceWorker from "./registerServiceWorker";
-import { requestPokemons, searchPokemons, requestPokemon } from "./reducers";
+import {
+  requestPokemons,
+  searchPokemons,
+  requestPokemon,
+  requestPokemonSpecies
+} from "./reducers";
 
 import "./index.css";
 
@@ -17,7 +22,8 @@ const logger = createLogger();
 const rootReducers = combineReducers({
   requestPokemons,
   searchPokemons,
-  requestPokemon
+  requestPokemon,
+  requestPokemonSpecies
 });
 
 const store = createStore(

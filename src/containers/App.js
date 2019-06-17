@@ -9,9 +9,7 @@ import ErrorBoundry from "../components/ErrorBoundry";
 
 import "./App.css";
 
-// parameter state comes from index.js provider store state(rootReducers)
-const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps);
+const mapStateToProps = state => {
   return {
     searchField: state.searchPokemons.searchField,
     pokemons: state.requestPokemons.pokemons,
@@ -36,7 +34,6 @@ class App extends Component {
     const filteredPokemons = pokemons.filter(poke => {
       return poke.name.toLowerCase().includes(searchField.toLowerCase());
     });
-    console.log(filteredPokemons);
     return (
       <div className="tc">
         <h1 className="f1">RoboFriends</h1>
@@ -51,7 +48,6 @@ class App extends Component {
           )}
         </Scroll>
       </div>
-      // <div />
     );
   }
 }

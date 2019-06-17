@@ -134,6 +134,7 @@ body {
   flex-direction: horizontal;
   align-items: center;
   justify-items: center;
+  position: relative;
 }
 
 .evolution-row .evolution-sprite {
@@ -175,5 +176,47 @@ body {
   fill: green;
   stroke: green;
   display: block;
-  margin: auto;
+  position: absolute;
+  margin: 0 auto;
+  top: calc(50% - 24px);
+  left: calc(50% - 24px);
+  /* transform: translate(-50%, -50%); */
+}
+
+.monster-minutia {
+  display: flex;
+  margin: 0 20px 10px;
+}
+
+.monster-minutia > strong {
+  flex-basis: 20%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin-right: 3px;
+  font-size: 14px;
+}
+
+.monster-minutia > span {
+  flex-basis: 30%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin: 0 2px;
+}
+
+@media (max-width: 320px) {
+  .monster-minutia > strong {
+    font-size: 12px;
+  }
+  .monster-minutia > span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .monster-minutia > strong {
+    font-size: 13px;
+  }
+  .monster-minutia > span {
+    font-size: 13px;
+  }
 }

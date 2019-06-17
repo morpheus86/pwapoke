@@ -5,7 +5,9 @@ import {
   REQUEST_POKEMONS_FAILED,
   GET_POKEMON_BY_NAME,
   GETTING_POKEMON_FAILED,
-  GET_CHARACTERISTICS
+  GET_CHARACTERISTICS,
+  GET_SPECIES,
+  GET_SPECIES_ERROR
 } from "./constants";
 
 const initialStateSearch = {
@@ -49,7 +51,6 @@ const initStatePokemon = {
 export const requestPokemon = (state = initStatePokemon, action = {}) => {
   switch (action.type) {
     case GET_POKEMON_BY_NAME:
-      console.log(action);
       return {
         ...state,
         pokemon: action.pokemon
@@ -63,6 +64,26 @@ export const requestPokemon = (state = initStatePokemon, action = {}) => {
       return {
         ...state,
         characteristics: action.char
+      };
+    default:
+      return state;
+  }
+};
+
+const initStatSpecies = {
+  species: []
+};
+export const requestPokemonSpecies = (state = initStatSpecies, action = {}) => {
+  switch (action.type) {
+    case GET_SPECIES:
+      return {
+        ...state,
+        species: action.species
+      };
+    case GET_SPECIES_ERROR:
+      return {
+        ...state,
+        error: action.error
       };
     default:
       return state;
